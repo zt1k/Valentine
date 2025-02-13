@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فالنتاين</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+            color: #333;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            direction: rtl;
+        }
+
+        .container {
+            margin-top: 50px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ff4d4d;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        button {
+            background-color: #ff4d4d;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #yes-button {
+            background-color: #28a745;
+            font-size: 1em;
+            transition: all 0.3s ease-in-out;
+            z-index: 1;
+        }
+
+        #yes-button:hover {
+            background-color: #218838;
+        }
+
+        #no-button {
+            font-size: 1em;
+            z-index: 2;
+        }
+
+        .no-below {
+            display: block;
+            margin-top: 20px;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .heart {
+            font-size: 5em;
+            color: #ff4d4d;
+            animation: heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart">💗🌷💗</div>
+        <h1>Rory, Will you be my Valentine؟</h1>
+        <p>اسففففف تاخرررت</p>
+        <button id="yes-button" onclick="goToNewPage()">إيوه</button>
+        <button id="no-button" onclick="changeTextAndGrow()">لا</button>
+    </div>
+
+    <script>
+        const yesButton = document.getElementById("yes-button");
+        const noButton = document.getElementById("no-button");
+
+        // قائمة العبارات
+        const phrases = [
+            "لا",
+            "اما😥",
+            "اتوقع بالغلط ضغطتي",
+            "اوف",
+            "حبيبك انا",
+            "please",
+            "لو سمحتي",
+            "my Rory😓",
+            "say yes",
+            "come on baby",
+            "انتظرك",
+            "يلا حبيبتي",
+            "خلاص حطي ايوه",
+            "قمري",
+            "وردتي",
+            "خلاص حطي صدق"
+        ];
+
+        let phraseIndex = 0; // لتتبع العبارة الحالية
+        let isNoFinal = false; // للتحقق إذا وصلنا للنص الأخير لزر "لا"
+
+        function changeTextAndGrow() {
+            // تغيير النصوص في زر "لا" إلى أن ينتهي
+            if (!isNoFinal) {
+                if (phraseIndex < phrases.length - 1) {
+                    phraseIndex++;
+                    noButton.textContent = phrases[phraseIndex];
+                } else {
+                    // عند الوصول للنص الأخير، تثبيت النص على "لا"
+                    noButton.textContent = "لا";
+                    isNoFinal = true;
+                }
+            }
+
+            // تكبير زر "إيوه" تدريجياً
+            const currentWidth = parseInt(window.getComputedStyle(yesButton).width);
+            const newSize = currentWidth + 50; // زيادة حجم الزر
+            yesButton.style.width = `${newSize}px`;
+            yesButton.style.height = `${newSize / 2}px`; // نسبية للحفاظ على الشكل
+            yesButton.style.fontSize = `${newSize / 10}px`; // تكبير الخط متناسب مع حجم الزر
+
+            // إذا كبر الزر لدرجة أنه يملأ الشاشة، اجعل زر "لا" أسفله
+            const yesButtonRect = yesButton.getBoundingClientRect();
+            if (yesButtonRect.bottom > window.innerHeight) {
+                noButton.classList.add("no-below");
+            }
+        }
+
+        function goToNewPage() {
+            // الانتقال إلى صفحة جديدة عند الضغط على "إيوه"
+            window.location.href = "page.html"; // ضع هنا رابط الصفحة الجديدة
+        }
+    </script>
+</body>
+</html>
